@@ -1,6 +1,8 @@
 # Multi-Region AWS Infrastructure with Transit Gateway Peering Workshop
 
-This README provides a detailed guide for setting up a AWS infrastructure across two regions using Terraform. It highlights the creation and integration of tree key components in each region: Transit Gateways (TGW), VPCs and EC2 Instances. The setup enables inter-region connectivity and resource deployment, showcasing an advanced cloud architecture that leverages AWS's global network.
+ ⚠️ Warning ⚠️ It should not be used in a production environment without thorough review and refactoring to ensure compliance with your organization's security and compliance requirements.
+
+This README provides a detailed step by step guide for setting up an AWS infrastructure across two regions using Terraform. It ensures the creation  of tree key components in each region: Transit Gateways (TGW), VPCs and EC2 Instances. The setup enables inter-region connectivity and resource deployment, showcasing an advanced cloud architecture that leverages AWS's global network.
 
 The Terraform configurations included in this guide covers the following:
 
@@ -14,9 +16,7 @@ The Terraform configurations included in this guide covers the following:
 ## Prerequisites
 
 Terraform installed on your local machine
-AWS account and CLI configured with necessary permissions
 Understanding of AWS services (VPC, EC2, IAM, TGW)
-Configuration Overview
 
 ## Configuration Variables
 
@@ -58,7 +58,7 @@ To deploy resources on AWS, you need to have credentials with admin permissions.
 
 ### Step 2: Add Credentials to the `~/.aws/credentials` File
 
-Add the generated AWS credentials to your `~/.aws/credentials` file for the AWS CLI to use. If you don't have this file, the AWS CLI will create it the first time you run `aws configure`. Here's how to add your credentials manually:
+Add the generated AWS credentials to your `~/.aws/credentials` file. Here is how to add your credentials manually:
 
 1. Open or create the `~/.aws/credentials` file in your favorite text editor.
 2. Add the following lines, replacing `<YOUR_ACCESS_KEY_ID>` and `<YOUR_SECRET_ACCESS_KEY>` with your credentials:
@@ -69,3 +69,12 @@ With your AWS credentials configured, you're now ready to deploy the project res
 
 `make deploy`
 
+## Cleaning Up Resources to Avoid Unnecessary Costs
+
+AWS resources like Transit Gateway and EC2 instances incur costs as long as they are running. To avoid unnecessary charges, it's important to clean up these resources when they are no longer needed.
+
+1. **Navigate to your project directory** where the main Makefile is located.
+
+2. **Run the `make destroy` command:**
+
+This command triggers the cleanup process defined under the `destroy` target in your Makefile. It will remove all the deployed resources.
